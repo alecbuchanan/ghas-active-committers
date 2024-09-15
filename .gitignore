@@ -1,6 +1,9 @@
 # Dependency directory
 node_modules
 
+# response_models directory
+response_models
+
 # Rest pulled from https://github.com/github/gitignore/blob/master/Node.gitignore
 # Logs
 logs

@@ -1,19 +1,22 @@
-name: 'The name of your action here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
-
-# Define your inputs here.
+name: 'Generate GitHub Advanced Security unique active committers report'
+author: 'alecbuchanan'
+description:
+  'GitHub Action to get the unique active committers in an organization(s) or
+  enterprise'
 inputs:
-  milliseconds:
-    description: 'Your input description here'
+  access-token:
+    description: 'GitHub Fine-Grained Access Token'
     required: true
-    default: '1000'
-
-# Define your outputs here.
-outputs:
-  time:
-    description: 'Your output description here'
+  organization-slugs:
+    description:
+      'Enter either a single organization slug or a comma separated list of
+      organization slugs to get the unique active committers for'
+    required: false
+  enterprise-slug:
+    description:
+      'Enter the enterprise slug to get the unique active committers for'
+    required: false
 
 runs:
-  using: node20
-  main: dist/index.js
+  using: 'node20'
+  main: 'dist/index.js'

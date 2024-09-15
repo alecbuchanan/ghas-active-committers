@@ -55,4 +55,4 @@ jobs:
         with:
           access-token: ${{ secrets.ACCESS_TOKEN }}
           organization-slugs: ${{ secrets.ORGANIZATION_SLUGS }}
-          enterprise-slug: ${{ secrets.ENTERPRISE_SLUGS }}   # Replace with your enterprise slug (optional)
+          enterprise-slug: ${{ secrets.ENTERPRISE_SLUGS }} # Replace with your enterprise slug (optional)

@@ -1,12 +1,8 @@
-import * as core from '@actions/core'
-import { processOrgs } from './processOrgs'
-import { processEnterprise } from './processEnterprise'
+const core = require('@actions/core')
+const { processOrgs } = require('./processOrgs')
+const { processEnterprise } = require('./processEnterprise')
 
-/**
- * The main function for the action.
- * @returns {Promise<void>} Resolves when the action is complete.
- */
-export async function run() {
+async function run() {
   try {
     const token = core.getInput('github-token', { required: true })
     const orgSlugs = core.getInput('organization-slugs', { required: false })
@@ -31,3 +27,5 @@ export async function run() {
     core.setFailed(error.message)
   }
 }
+
+module.exports = { run }

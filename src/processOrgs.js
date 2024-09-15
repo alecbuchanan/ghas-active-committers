@@ -1,8 +1,8 @@
-import { DefaultArtifactClient } from '@actions/artifact'
-import { writeFileSync } from 'fs'
-import { fetchOrgUsers } from './fetch-org-users'
+const { DefaultArtifactClient } = require('@actions/artifact')
+const { writeFileSync } = require('fs')
+const { fetchOrgUsers } = require('./fetch-org-users')
 
-export async function processOrgs(token, orgSlugs) {
+async function processOrgs(token, orgSlugs) {
   try {
     const artifactClient = DefaultArtifactClient()
     const rootDirectory = '.' // Root directory of the files
@@ -41,3 +41,5 @@ export async function processOrgs(token, orgSlugs) {
     throw error
   }
 }
+
+module.exports = { processOrgs }

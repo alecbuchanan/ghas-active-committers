@@ -1,8 +1,8 @@
-import { DefaultArtifactClient } from '@actions/artifact'
-import { writeFileSync } from 'fs'
-import { fetchEnterpriseUsers } from './fetch-enterprise-users'
+const { DefaultArtifactClient } = require('@actions/artifact')
+const { writeFileSync } = require('fs')
+const { fetchEnterpriseUsers } = require('./fetch-enterprise-users')
 
-export async function processEnterprise(token, enterpriseSlug) {
+async function processEnterprise(token, enterpriseSlug) {
   try {
     const artifactClient = DefaultArtifactClient()
     const rootDirectory = '.' // Root directory of the files
@@ -34,3 +34,5 @@ export async function processEnterprise(token, enterpriseSlug) {
     throw error
   }
 }
+
+module.exports = { processEnterprise }

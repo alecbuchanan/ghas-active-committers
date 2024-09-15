@@ -1,6 +1,6 @@
-import { Octokit } from 'octokit'
+const { Octokit } = require('octokit')
 
-export async function fetchOrgUsers(token, orgSlugs) {
+async function fetchOrgUsers(token, orgSlugs) {
   const octokit = new Octokit({ auth: token })
   const orgs = orgSlugs.split(',').map(org => org.trim())
   const uniqueUsers = new Set()
@@ -28,3 +28,5 @@ export async function fetchOrgUsers(token, orgSlugs) {
 
   return Array.from(uniqueUsers)
 }
+
+module.exports = { fetchOrgUsers }

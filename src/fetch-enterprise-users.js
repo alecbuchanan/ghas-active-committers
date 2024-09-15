@@ -1,6 +1,6 @@
-import { Octokit } from 'octokit'
+const { Octokit } = require('octokit')
 
-export async function fetchEnterpriseUsers(token, enterpriseSlug) {
+async function fetchEnterpriseUsers(token, enterpriseSlug) {
   const octokit = new Octokit({ auth: token })
   const response = await octokit.paginate(
     'GET /enterprises/{enterprise}/settings/billing/advanced-security',
@@ -19,3 +19,5 @@ export async function fetchEnterpriseUsers(token, enterpriseSlug) {
 
   return Array.from(new Set(response))
 }
+
+module.exports = { fetchEnterpriseUsers }

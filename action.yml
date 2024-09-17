@@ -1,4 +1,4 @@
-name: 'Generate GitHub Advanced Security unique active committers report'
+name: 'Generate GitHub Advanced Security Unique Active Committers Report'
 author: 'alecbuchanan'
 description:
   'GitHub Action to get the unique active committers in either an Organization

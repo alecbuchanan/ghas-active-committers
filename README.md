@@ -37,7 +37,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Generate GHAS Unique Active Committers Report
-        uses: ./ # Uses an action in the root directory of your repository
+        uses: alecbuchanan/ghas-active-committers@v1
         with:
           github-token: ${{ secrets.ACCESS_TOKEN }}
           organization-slug: 'org' # Replace with your organization slug (optional)

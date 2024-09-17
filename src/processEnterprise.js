@@ -4,28 +4,28 @@ const { fetchEnterpriseUsers } = require('./fetch-enterprise-users')
 
 async function processEnterprise(token, enterpriseSlug) {
   try {
-    const artifactClient = DefaultArtifactClient()
+    const artifactClient = new DefaultArtifactClient()
     const rootDirectory = '.' // Root directory of the files
     const options = { continueOnError: false }
 
-    const users = await fetchEnterpriseUsers(token, enterpriseSlug)
-    const uniqueEnterpriseUsers = new Set(users)
+    const entUsers = await fetchEnterpriseUsers(token, enterpriseSlug)
+    const distinctEntUsers = new Set(entUsers)
 
-    const uniqueEnterpriseUsersArray = Array.from(uniqueEnterpriseUsers)
+    const uniqueEntUsersArray = Array.from(distinctEntUsers)
 
     // Convert to CSV
-    const enterpriseCsvContent = `enterprise_slug: ${enterpriseSlug}\nusername\n${uniqueEnterpriseUsersArray.join(
+    const enterpriseCsvContent = `enterprise_slug: ${enterpriseSlug}\n${uniqueEntUsersArray.join(
       '\n'
-    )}\nTotal Unique Active Committers: ${uniqueEnterpriseUsersArray.length}`
-    const enterpriseFilePath = `${enterpriseSlug}_unique_users.csv`
+    )}\nTotal Unique Active Committers: ${uniqueEntUsersArray.length}`
+    const entFilePath = `${enterpriseSlug}_active_committers.csv`
 
     // Write CSV to file
-    writeFileSync(enterpriseFilePath, enterpriseCsvContent)
+    writeFileSync(entFilePath, enterpriseCsvContent)
 
     // Upload artifact
     await artifactClient.uploadArtifact(
       'enterprise-unique-users',
-      [enterpriseFilePath],
+      [entFilePath],
       rootDirectory,
       options
     )

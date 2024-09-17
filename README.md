@@ -1,18 +1,18 @@
 # ghas-active-committers
 
 A GitHub Action to provide a count and a list of unique active committers in
-your GitHub Organization(s) or Enterprise.
+your GitHub Organization or Enterprise.
 
 ## Permissions
 
-To generate a report for Organizations, you must use a Fine-Grained token with
-"Administration" organization permissions (read) against all of the orgs you are
+To generate a report for an Organization, you must use a Fine-Grained token with
+"Administration" organization permissions (read) against the org you are
 supplying. For more information, refer to the
 [GitHub API documentation](https://docs.github.com/en/enterprise-cloud@latest/rest/billing/billing?apiVersion=2022-11-28#get-github-advanced-security-active-committers-for-an-organization).
 
-To generate a report for an Enterprise, you must use a Fine-Grained token with
-"Enterprise administration" business permissions (write) against the Enterprise
-you are supplying. For more information, refer to the
+To generate a report for an Enterprise, you must use a Classic Personal Access
+token with "manage_billing:enterprise" against the Enterprise you are supplying.
+For more information, refer to the
 [GitHub API documentation](https://docs.github.com/en/enterprise-cloud@latest/rest/enterprise-admin/billing?apiVersion=2022-11-28#get-github-advanced-security-active-committers-for-an-enterprise).
 
 ## Usage
@@ -37,8 +37,8 @@ jobs:
       - name: Generate GHAS Unique Active Committers Report
         uses: ./ # Uses an action in the root directory of your repository
         with:
-          access-token: ${{ secrets.ACCESS_TOKEN }}
-          organization-slugs: 'org1,org2' # Replace with your organization slugs
+          github-token: ${{ secrets.ACCESS_TOKEN }}
+          organization-slug: 'org' # Replace with your organization slug (optional)
           enterprise-slug:
             'enterprise' # Replace with your enterprise slug
             # (optional)
@@ -46,15 +46,14 @@ jobs:
 
 ## Inputs
 
-- `access-token` (required): The GitHub token to authenticate API requests.
-- `organization-slugs` (optional): A single organization slug or a
-  comma-separated list of organization slugs to get the unique active committers
-  for.
+- `github-token` (required): The GitHub token to authenticate API requests.
+- `organization-slug` (optional): A single organization slug to get the unique
+  active committers for.
 - `enterprise-slug` (optional): The enterprise slug to get the unique active
   committers for.
 
 ## Outputs
 
 The action generates CSV files containing the list of unique active committers
-for the specified organizations or enterprise. The CSV files are uploaded as
+for the specified organization or enterprise. The CSV files are uploaded as
 artifacts.

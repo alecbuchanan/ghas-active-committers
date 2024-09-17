@@ -1,20 +1,17 @@
 name: 'Generate GitHub Advanced Security unique active committers report'
 author: 'alecbuchanan'
 description:
-  'GitHub Action to get the unique active committers in an organization(s) or
-  enterprise'
+  'GitHub Action to get the unique active committers in either an Organization
+  or an Enterprise'
 inputs:
   github-token:
     description: 'GitHub Fine-Grained Access Token'
     required: true
-  organization-slugs:
-    description:
-      'Enter either a single organization slug or a comma separated list of
-      organization slugs to get the unique active committers for'
+  organization-slug:
+    description: 'The organization slug to get the unique active committers for'
     required: false
   enterprise-slug:
-    description:
-      'Enter the enterprise slug to get the unique active committers for'
+    description: 'The enterprise slug to get the unique active committers for'
     required: false
 
 runs:

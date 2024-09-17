@@ -2,29 +2,22 @@ const { DefaultArtifactClient } = require('@actions/artifact')
 const { writeFileSync } = require('fs')
 const { fetchOrgUsers } = require('./fetch-org-users')
 
-async function processOrgs(token, orgSlugs) {
+async function processOrg(token, orgSlug) {
   try {
     const artifactClient = new DefaultArtifactClient()
     const rootDirectory = '.' // Root directory of the files
     const options = { continueOnError: false }
 
-    const orgResults = await fetchOrgUsers(token, orgSlugs)
-    const uniqueOrgUsers = new Set()
+    const orgUsers = await fetchOrgUsers(token, orgSlug)
+    const distinctOrgUsers = new Set(orgUsers)
 
-    // Combine and de-duplicate users from organizations
-    for (const result of orgResults) {
-      for (const user of result.users) {
-        uniqueOrgUsers.add(user)
-      }
-    }
-
-    const uniqueOrgUsersArray = Array.from(uniqueOrgUsers)
+    const uniqueOrgUsersArray = Array.from(distinctOrgUsers)
 
     // Convert to CSV
-    const orgCsvContent = `organization_slugs: ${orgSlugs}\nusername\n${uniqueOrgUsersArray.join(
+    const orgCsvContent = `organization_slug: ${orgSlug}\n${uniqueOrgUsersArray.join(
       '\n'
     )}\nTotal Unique Active Committers: ${uniqueOrgUsersArray.length}`
-    const orgFilePath = 'org_unique_active_committers.csv'
+    const orgFilePath = `${orgSlug}_active_committers.csv`
 
     // Write CSV to file
     writeFileSync(orgFilePath, orgCsvContent)
@@ -42,4 +35,4 @@ async function processOrgs(token, orgSlugs) {
   }
 }
 
-module.exports = { processOrgs }
+module.exports = { processOrg }

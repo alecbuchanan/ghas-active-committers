@@ -1,20 +1,20 @@
 const core = require('@actions/core')
-const { processOrgs } = require('./processOrgs')
+const { processOrg } = require('./processOrg')
 const { processEnterprise } = require('./processEnterprise')
 
 async function run() {
   try {
     const token = core.getInput('github-token', { required: true })
-    const orgSlugs = core.getInput('organization-slugs', { required: false })
+    const orgSlug = core.getInput('organization-slug', { required: false })
     const enterpriseSlug = core.getInput('enterprise-slug', { required: false })
 
-    if (!orgSlugs && !enterpriseSlug) {
-      core.setFailed('No organization or enterprise slugs provided.')
+    if (!orgSlug && !enterpriseSlug) {
+      core.setFailed('No organization or enterprise slug provided.')
       return
     }
 
-    if (orgSlugs) {
-      await processOrgs(token, orgSlugs)
+    if (orgSlug) {
+      await processOrg(token, orgSlug)
     }
 
     if (enterpriseSlug) {

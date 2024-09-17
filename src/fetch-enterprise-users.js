@@ -1,8 +1,8 @@
-const { Octokit } = require('octokit')
-
 async function fetchEnterpriseUsers(token, enterpriseSlug) {
+  const { Octokit } = await import('octokit') // Use dynamic import
   const octokit = new Octokit({ auth: token })
-  const response = await octokit.paginate(
+
+  const users = await octokit.paginate(
     'GET /enterprises/{enterprise}/settings/billing/advanced-security',
     {
       enterprise: enterpriseSlug,
@@ -12,12 +12,12 @@ async function fetchEnterpriseUsers(token, enterpriseSlug) {
       }
     },
     pageResponse =>
-      pageResponse.data.repositories.flatMap(repo =>
-        repo.unique_active_committers_breakdown.map(user => user.user_login)
+      pageResponse.data.flatMap(repo =>
+        repo.advanced_security_committers_breakdown.map(user => user.user_login)
       )
   )
 
-  return Array.from(new Set(response))
+  return Array.from(new Set(users))
 }
 
 module.exports = { fetchEnterpriseUsers }

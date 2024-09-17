@@ -4,6 +4,9 @@ node_modules
 # response_models directory
 response_models
 
+# Ignore any files that end with _active_committers.csv
+*_active_committers.csv
+
 # Rest pulled from https://github.com/github/gitignore/blob/master/Node.gitignore
 # Logs
 logs

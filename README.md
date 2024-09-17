@@ -1,4 +1,5 @@
 # ghas-active-committers
+[![CodeQL](https://github.com/alecbuchanan/ghas-active-committers/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/alecbuchanan/ghas-active-committers/actions/workflows/codeql-analysis.yml)
 
 A GitHub Action to provide a count and a list of unique active committers in
 your GitHub Organization or Enterprise.

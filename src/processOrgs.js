@@ -4,7 +4,7 @@ const { fetchOrgUsers } = require('./fetch-org-users')
 
 async function processOrgs(token, orgSlugs) {
   try {
-    const artifactClient = DefaultArtifactClient()
+    const artifactClient = new DefaultArtifactClient()
     const rootDirectory = '.' // Root directory of the files
     const options = { continueOnError: false }
 

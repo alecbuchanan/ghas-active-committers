@@ -33,9 +33,6 @@ jobs:
   generate-report:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
       - name: Generate GHAS Unique Active Committers Report
         uses: alecbuchanan/ghas-active-committers@v1
         with:

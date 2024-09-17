@@ -54,5 +54,5 @@ jobs:
         uses: ./
         with:
           github-token: ${{ secrets.ACCESS_TOKEN }}
-          organization-slug: ${{ secrets.ORGANIZATION_SLUGS }} # Replace with your organization slug (optional)
-          enterprise-slug: ${{ secrets.ENTERPRISE_SLUGS }} # Replace with your enterprise slug (optional)
+          organization-slug: ${{ secrets.ORGANIZATION_SLUG }} # Replace with your organization slug (optional)
+          enterprise-slug: ${{ secrets.ENTERPRISE_SLUG }} # Replace with your enterprise slug (optional)

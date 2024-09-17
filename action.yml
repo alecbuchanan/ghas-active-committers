@@ -3,6 +3,11 @@ author: 'alecbuchanan'
 description:
   'GitHub Action to get the unique active committers in either an Organization
   or an Enterprise'
+
+branding:
+  icon: 'file-text'
+  color: 'green'
+    
 inputs:
   github-token:
     description: 'GitHub Fine-Grained Access Token'

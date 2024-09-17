@@ -1,30 +1,31 @@
 const core = require('@actions/core')
-const { wait } = require('./wait')
+const { processOrg } = require('./processOrg')
+const { processEnterprise } = require('./processEnterprise')
 
-/**
- * The main function for the action.
- * @returns {Promise<void>} Resolves when the action is complete.
- */
 async function run() {
   try {
-    const ms = core.getInput('milliseconds', { required: true })
+    const token = core.getInput('github-token', { required: true })
+    const orgSlug = core.getInput('organization-slug', { required: false })
+    const enterpriseSlug = core.getInput('enterprise-slug', { required: false })
 
-    // Debug logs are only output if the `ACTIONS_STEP_DEBUG` secret is true
-    core.debug(`Waiting ${ms} milliseconds ...`)
+    if (!orgSlug && !enterpriseSlug) {
+      core.setFailed('No organization or enterprise slug provided.')
+      return
+    }
 
-    // Log the current timestamp, wait, then log the new timestamp
-    core.debug(new Date().toTimeString())
-    await wait(parseInt(ms, 10))
-    core.debug(new Date().toTimeString())
+    if (orgSlug) {
+      await processOrg(token, orgSlug)
+    }
 
-    // Set outputs for other workflow steps to use
-    core.setOutput('time', new Date().toTimeString())
+    if (enterpriseSlug) {
+      await processEnterprise(token, enterpriseSlug)
+    }
+
+    console.log('Artifacts uploaded successfully.')
   } catch (error) {
     // Fail the workflow run if an error occurs
     core.setFailed(error.message)
   }
 }
 
-module.exports = {
-  run
-}
+module.exports = { run }

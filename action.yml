@@ -7,7 +7,7 @@ description:
 branding:
   icon: 'file-text'
   color: 'green'
-    
+
 inputs:
   github-token:
     description: 'GitHub Fine-Grained Access Token'

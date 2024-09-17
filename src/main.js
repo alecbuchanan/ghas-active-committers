@@ -4,7 +4,7 @@ const { processEnterprise } = require('./processEnterprise')
 
 async function run() {
   try {
-    const token = core.getInput('access-token', { required: true })
+    const token = core.getInput('github-token', { required: true })
     const orgSlugs = core.getInput('organization-slugs', { required: false })
     const enterpriseSlug = core.getInput('enterprise-slug', { required: false })
 

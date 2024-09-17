@@ -4,7 +4,7 @@ description:
   'GitHub Action to get the unique active committers in an organization(s) or
   enterprise'
 inputs:
-  access-token:
+  github-token:
     description: 'GitHub Fine-Grained Access Token'
     required: true
   organization-slugs:
